@@ -17,8 +17,4 @@
         <EmbeddedResource Include="modlunky_shortcut.vdf"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Submodules\Steam-VDF-Converter\Steam-VDF-Converter\VdfConverter.csproj"/>
-    </ItemGroup>
-
 </Project>

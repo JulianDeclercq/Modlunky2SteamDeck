@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modlunky2SteamDeck", "Modlunky2SteamDeck\Modlunky2SteamDeck.csproj", "{1D21516B-062A-48F7-8D59-735442EACF39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VdfConverter", "Submodules\Steam-VDF-Converter\Steam-VDF-Converter\VdfConverter.csproj", "{F65A17E6-6834-4F2D-8306-71F4404FC653}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{1D21516B-062A-48F7-8D59-735442EACF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D21516B-062A-48F7-8D59-735442EACF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D21516B-062A-48F7-8D59-735442EACF39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F65A17E6-6834-4F2D-8306-71F4404FC653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F65A17E6-6834-4F2D-8306-71F4404FC653}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F65A17E6-6834-4F2D-8306-71F4404FC653}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F65A17E6-6834-4F2D-8306-71F4404FC653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
