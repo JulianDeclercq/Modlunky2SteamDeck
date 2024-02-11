@@ -9,16 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <None Remove="modlunky_shortcut.vdf"/>
         <EmbeddedResource Include="modlunky_shortcut.vdf"/>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\submodules\Steam-VDF-Converter\VdfConverter.csproj" />
+      <ProjectReference Include="..\submodules\ValveKeyValue\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj" />
     </ItemGroup>
 
 </Project>

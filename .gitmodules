@@ -1,0 +1,3 @@
+[submodule "submodules/ValveKeyValue"]
+	path = submodules/ValveKeyValue
+	url = git@github.com:ValveResourceFormat/ValveKeyValue.git
