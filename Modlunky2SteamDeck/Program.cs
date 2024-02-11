@@ -9,6 +9,7 @@ internal abstract class Program
     {
         Console.WriteLine("Modlunky2SteamDeck started");
 
+        
         const string steamPath = "/home/deck/.local/share/Steam";
         const string configPath = $"{steamPath}/config/config.vdf";
 
@@ -63,7 +64,7 @@ internal abstract class Program
         Console.WriteLine("Successfully wrote modlunky shortcut to stream");
     }
     
-    private static void AddCompatToolMapping(string configPath)
+    private static void AddCompatToolMappingOld(string configPath)
     {
         var textSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
         var options = new KVSerializerOptions

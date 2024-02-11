@@ -1,2 +1,22 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5941767a_002D7cec_002D43d4_002D8b05_002D3296d57a78dd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="DeserializerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfConverter.Test.DeserializerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfParser.Test.SerializerTests.ConfigParsing&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfParser.Test.SerializerTests.Serialize_Dictionary&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfConverter.Test.SerializerTests.ConfigParsing&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfConverter.Test.SerializerTests.Serialize_Dictionary&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfConverter.Test.SerializerTests.Serialize_List&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::net8.0::VdfConverter.Test.SerializerTests.GotRekt&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=de2231bf_002D5a08_002D4868_002D88c3_002D958b088b0f99/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigParsing" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::.NETCoreApp,Version=v2.2::VdfParser.Test.SerializerTests.ConfigParsing&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::F5454F63-7E17-4491-B2B3-97430A1C3A50::.NETCoreApp,Version=v2.2::VdfParser.Test.DeserializerTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=modlunky/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
