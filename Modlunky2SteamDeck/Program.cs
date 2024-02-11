@@ -8,6 +8,9 @@ internal abstract class Program
     private static void Main(string[] args)
     {
         Console.WriteLine("Modlunky2SteamDeck started");
+
+        AddCompatToolMapping("./config.vdf");
+        return;
         
         const string steamPath = "/home/deck/.local/share/Steam";
         const string configPath = $"{steamPath}/config/config.vdf";
@@ -58,11 +61,12 @@ internal abstract class Program
 
     private static void SaveShortcuts(KVSerializer binarySerializer, List<Shortcut> shortcuts, string shortcutsPath)
     {
+        // TODO: Take a backup of the file before modifying it
         using var outputStream = File.OpenWrite(shortcutsPath);
         binarySerializer.Serialize(outputStream, shortcuts, ""); // not sure about name 
         Console.WriteLine("Successfully wrote modlunky shortcut to stream");
     }
-    
+
     private static void AddCompatToolMapping(string configPath)
     {
         var textSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
@@ -71,7 +75,29 @@ internal abstract class Program
             HasEscapeSequences = true
         };
         options.Conditions.Clear(); // Remove default conditionals set by the library
-        
+
+        using var configInputStream = File.OpenRead(configPath);
+        var config = textSerializer.Deserialize<InstallConfigStore>(configInputStream, options);
+
+        using var stream = File.OpenWrite("configtestout.vdf");
+        {
+            var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
+            kv.Serialize(stream, config, "InstallConfigStore");
+        }
+        // TODO: Make sure to OVERWRITE the actual file, not append to it or insert in the middle!!
+        // TODO: Take a backup of the file before modifying it
+        // TODO: Do a content check to see if nothing else changed or got lost from the original 
+    }
+
+    private static void AddCompatToolMappingOld(string configPath)
+    {
+        var textSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
+        var options = new KVSerializerOptions
+        {
+            HasEscapeSequences = true
+        };
+        options.Conditions.Clear(); // Remove default conditionals set by the library
+
         using var configInputStream = File.OpenRead(configPath);
         var config = textSerializer.Deserialize(configInputStream, options);
 
@@ -88,10 +114,10 @@ internal abstract class Program
         {
             new("name", "proton_experimental"),
             new("config", ""),
-            new("priority", 250),
+            new("priority", 250)
         });
         newCompatToolMapping.Add(modlunkyEntry);
-        
+
         using var outputStream = File.OpenWrite($"{configPath}TESTOUTPUT");
         textSerializer.Serialize(outputStream, config, ""); // not sure about name
         Console.WriteLine("Successfully wrote modlunky compat tool mapping to stream");

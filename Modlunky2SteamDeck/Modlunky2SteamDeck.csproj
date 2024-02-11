@@ -11,6 +11,9 @@
     <ItemGroup>
         <None Remove="modlunky_shortcut.vdf"/>
         <EmbeddedResource Include="modlunky_shortcut.vdf"/>
+        <None Update="config.vdf">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
