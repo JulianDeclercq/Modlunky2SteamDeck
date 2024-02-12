@@ -15,8 +15,8 @@ public class Sp
 {
     public int X { get; set; }
     public int Y { get; set; }
-    public int Width { get; set; }
-    public int Height { get; set; }
+    public int width { get; set; } // capitalization is the same as in the original config.vdf
+    public int height { get; set; } // capitalization is the same as in the original config.vdf
 }
 
 public class Display
