@@ -78,19 +78,31 @@ internal abstract class Program
         };
         options.Conditions.Clear(); // Remove default conditionals set by the library
 
+        var backupPath = $"{configPath}{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}.backup";
+        File.Copy(configPath, backupPath); 
+        
         using var configInputStream = File.OpenRead(configPath);
         var config = textSerializer.Deserialize<InstallConfigStore>(configInputStream, options);
+        
+        // var modlunkyAppId = "3921648026"; // real one
+        var modlunkyAppId = "1337"; // fake one for testing
 
-        using var stream = new FileStream("configtestout.vdf", FileMode.Create, FileAccess.Write, FileShare.None);
+        var compatToolMapping = config.Software.Valve.Steam.CompatToolMapping;
+        compatToolMapping[modlunkyAppId] = new CompatToolMappingEntry
+        {
+            name = "proton_experimental",
+            config = "",
+            priority = 250
+        };
+        
+        // TODO: write to the configPath, not to the test output
+        using var stream = new FileStream("configtestout.vdf", FileMode.Truncate, FileAccess.Write, FileShare.None);
         {
             var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
             kv.Serialize(stream, config, "InstallConfigStore");
         }
-        // TODO: Make sure to OVERWRITE the actual file, not append to it or insert in the middle!!
-        // TODO: Take a backup of the file before modifying it
-        // TODO: Do a content check to see if nothing else changed or got lost from the original 
-        
         return;
+        
         var newSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text); 
         var newOptions = new KVSerializerOptions
         {
