@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
+using Modlunky2SteamDeck.Models;
 using ValveKeyValue;
+using Directory = System.IO.Directory;
 
 namespace Modlunky2SteamDeck;
 
@@ -63,7 +65,7 @@ internal abstract class Program
     {
         // TODO: Take a backup of the file before modifying it
         using var outputStream = File.OpenWrite(shortcutsPath);
-        binarySerializer.Serialize(outputStream, shortcuts, ""); // not sure about name 
+        binarySerializer.Serialize(outputStream, shortcuts, "Shortcuts"); // not sure about name 
         Console.WriteLine("Successfully wrote modlunky shortcut to stream");
     }
 
@@ -79,7 +81,7 @@ internal abstract class Program
         using var configInputStream = File.OpenRead(configPath);
         var config = textSerializer.Deserialize<InstallConfigStore>(configInputStream, options);
 
-        using var stream = File.OpenWrite("configtestout.vdf");
+        using var stream = new FileStream("configtestout.vdf", FileMode.Create, FileAccess.Write, FileShare.None);
         {
             var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
             kv.Serialize(stream, config, "InstallConfigStore");
@@ -87,6 +89,18 @@ internal abstract class Program
         // TODO: Make sure to OVERWRITE the actual file, not append to it or insert in the middle!!
         // TODO: Take a backup of the file before modifying it
         // TODO: Do a content check to see if nothing else changed or got lost from the original 
+        
+        return;
+        var newSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text); 
+        var newOptions = new KVSerializerOptions
+        {
+            HasEscapeSequences = true
+        };
+        newOptions.Conditions.Clear(); // Remove default conditionals set by the library
+        
+        using var newConfigInputStream = File.OpenRead(configPath);
+        var newConfig = newSerializer.Deserialize(newConfigInputStream, newOptions);
+        int bkpt = 5;
     }
 
     private static void AddCompatToolMappingOld(string configPath)
