@@ -19,7 +19,6 @@ internal abstract class Program
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
 
         var binarySerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);
-
         var shortcuts = LoadShortcuts(binarySerializer, shortcutsPath);
         var modlunkyEntry = LoadModlunkyEntry(binarySerializer);
 
@@ -58,12 +57,13 @@ internal abstract class Program
 
     private static void SaveShortcuts(KVSerializer binarySerializer, List<Shortcut> shortcuts, string shortcutsPath)
     {
-        // TODO: Take a backup of the file before modifying it
+        Backup(shortcutsPath);
+        
         using var outputStream = File.OpenWrite(shortcutsPath);
         binarySerializer.Serialize(outputStream, shortcuts, "Shortcuts"); // not sure about name 
         Console.WriteLine("Successfully wrote modlunky shortcut to stream");
     }
-
+    
     private static void AddCompatToolMapping(string configPath)
     {
         var textSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
@@ -92,13 +92,21 @@ internal abstract class Program
             priority = 250
         };
         
-        var backupPath = $"{configPath}{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}.backup";
-        File.Copy(configPath, backupPath); 
-        
+        Backup(configPath);
         using var stream = new FileStream(configPath, FileMode.Truncate, FileAccess.Write, FileShare.None);
         {
             var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
             kv.Serialize(stream, config, "InstallConfigStore");
         }
+    }
+    
+    private static void Backup(string path)
+    {
+        var fileName = Path.GetFileNameWithoutExtension(path);
+        if (fileName == null)
+            throw new Exception("Failed to get file name without extension");
+        
+        var backupPath = $"{fileName}{DateTime.UtcNow.ToString("ddMMMyyHHmmss")}.backup";
+        File.Copy(path, backupPath); 
     }
 }
