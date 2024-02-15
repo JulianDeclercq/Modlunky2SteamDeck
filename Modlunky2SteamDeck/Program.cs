@@ -10,7 +10,10 @@ internal abstract class Program
     private static void Main(string[] args)
     {
         Console.WriteLine("Modlunky2SteamDeck started");
-
+        var lelelel = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);  
+        var l = LoadModlunkyEntry(lelelel);
+        return;
+        
         const string steamPath = "/home/deck/.local/share/Steam";
         const string configPath = $"{steamPath}/config/config.vdf";
 
