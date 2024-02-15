@@ -17,6 +17,9 @@ internal abstract class Program
         // TODO: Support entering your steam id, this just picks the first one.
         var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
+        
+        if (!IsSpelunky2Installed(steamPath))
+            throw new Exception("Spelunky 2 is not installed.");
 
         var binarySerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);
         var shortcuts = LoadShortcuts(binarySerializer, shortcutsPath);
@@ -33,6 +36,13 @@ internal abstract class Program
         Console.WriteLine("Modlunky2SteamDeck finished successfully.");
     }
 
+    private static bool IsSpelunky2Installed(string steamPath)
+    {
+        const int spelunky2AppId = 418530;
+        var appManifestPath = $"{steamPath}/steamapps/appmanifest_{spelunky2AppId}.acf";
+        return File.Exists(appManifestPath);
+    }
+    
     private static List<Shortcut> LoadShortcuts(KVSerializer binarySerializer, string shortcutsPath)
     {
         using var shortcutsInputStream = File.OpenRead(shortcutsPath);
