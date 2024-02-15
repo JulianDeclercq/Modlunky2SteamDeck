@@ -1,28 +1,28 @@
 ﻿using System.Reflection;
 using Modlunky2SteamDeck.Models;
 using ValveKeyValue;
-using Directory = System.IO.Directory;
 
 namespace Modlunky2SteamDeck;
 
 internal abstract class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         Console.WriteLine("Modlunky2SteamDeck started");
-        var lelelel = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);  
-        var l = LoadModlunkyEntry(lelelel);
-        return;
-        
+
         const string steamPath = "/home/deck/.local/share/Steam";
         const string configPath = $"{steamPath}/config/config.vdf";
+        const string spelunky2Path = $"{steamPath}/steamapps/common/Spelunky 2";
+        await GithubApi.DownloadLatestRelease("spelunky-fyi", "modlunky2", $"{spelunky2Path}/modlunky2.exe");
+        
+        if (!Path.Exists(spelunky2Path))
+            throw new Exception("Spelunky 2 is not installed.");
 
         // TODO: Support entering your steam id, this just picks the first one.
         var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
-        
-        if (!IsSpelunky2Installed(steamPath))
-            throw new Exception("Spelunky 2 is not installed.");
+
+        //await DownloadModlunky2();
 
         var binarySerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);
         var shortcuts = LoadShortcuts(binarySerializer, shortcutsPath);
@@ -39,13 +39,6 @@ internal abstract class Program
         Console.WriteLine("Modlunky2SteamDeck finished successfully.");
     }
 
-    private static bool IsSpelunky2Installed(string steamPath)
-    {
-        const int spelunky2AppId = 418530;
-        var appManifestPath = $"{steamPath}/steamapps/appmanifest_{spelunky2AppId}.acf";
-        return File.Exists(appManifestPath);
-    }
-    
     private static List<Shortcut> LoadShortcuts(KVSerializer binarySerializer, string shortcutsPath)
     {
         using var shortcutsInputStream = File.OpenRead(shortcutsPath);
@@ -71,12 +64,12 @@ internal abstract class Program
     private static void SaveShortcuts(KVSerializer binarySerializer, List<Shortcut> shortcuts, string shortcutsPath)
     {
         Backup(shortcutsPath);
-        
+
         using var outputStream = File.OpenWrite(shortcutsPath);
         binarySerializer.Serialize(outputStream, shortcuts, "Shortcuts"); // not sure about name 
         Console.WriteLine("Successfully wrote modlunky shortcut to stream");
     }
-    
+
     private static void AddCompatToolMapping(string configPath)
     {
         var textSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
@@ -88,8 +81,8 @@ internal abstract class Program
 
         using var configInputStream = File.OpenRead(configPath);
         var config = textSerializer.Deserialize<InstallConfigStore>(configInputStream, options);
-        
-        const string modlunkyAppId = "3921648026"; 
+
+        const string modlunkyAppId = "3921648026";
 
         var compatToolMapping = config.Software.Valve.Steam.CompatToolMapping;
         if (compatToolMapping.ContainsKey(modlunkyAppId))
@@ -97,14 +90,14 @@ internal abstract class Program
             Console.WriteLine("Modlunky compat tool mapping already exists");
             return;
         }
-        
+
         compatToolMapping[modlunkyAppId] = new CompatToolMappingEntry
         {
             name = "proton_experimental",
             config = "",
             priority = 250
         };
-        
+
         Backup(configPath);
         using var stream = new FileStream(configPath, FileMode.Truncate, FileAccess.Write, FileShare.None);
         {
@@ -112,14 +105,14 @@ internal abstract class Program
             kv.Serialize(stream, config, "InstallConfigStore");
         }
     }
-    
+
     private static void Backup(string path)
     {
         var fileName = Path.GetFileNameWithoutExtension(path);
         if (fileName == null)
             throw new Exception("Failed to get file name without extension");
-        
+
         var backupPath = $"{fileName}{DateTime.UtcNow.ToString("ddMMMyyHHmmss")}.backup";
-        File.Copy(path, backupPath); 
+        File.Copy(path, backupPath);
     }
 }

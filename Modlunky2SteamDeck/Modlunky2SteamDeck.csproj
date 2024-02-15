@@ -12,19 +12,22 @@
         <None Remove="modlunky_shortcut.vdf"/>
         <EmbeddedResource Include="modlunky_shortcut.vdf"/>
         <None Update="config.vdf">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="configtest.vdf">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="configdraft.vdf">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\submodules\Steam-VDF-Converter\VdfConverter.csproj" />
-      <ProjectReference Include="..\submodules\ValveKeyValue\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj" />
+        <ProjectReference Include="..\submodules\ValveKeyValue\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     </ItemGroup>
 
 </Project>
