@@ -13,17 +13,20 @@ internal abstract class Program
         const string steamPath = "/home/deck/.local/share/Steam";
         const string configPath = $"{steamPath}/config/config.vdf";
         const string spelunky2Path = $"{steamPath}/steamapps/common/Spelunky 2";
-        await GithubApi.DownloadLatestRelease("spelunky-fyi", "modlunky2", $"{spelunky2Path}/modlunky2.exe");
         
         if (!Path.Exists(spelunky2Path))
             throw new Exception("Spelunky 2 is not installed.");
 
+        const string modlunkyPath = $"{spelunky2Path}/modlunky2.exe";
+        if (Path.Exists(modlunkyPath))
+            throw new Exception("Modlunky2 is already installed.");
+        
         // TODO: Support entering your steam id, this just picks the first one.
         var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
 
-        //await DownloadModlunky2();
-
+        await GithubApi.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath); 
+        
         var binarySerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);
         var shortcuts = LoadShortcuts(binarySerializer, shortcutsPath);
         var modlunkyEntry = LoadModlunkyEntry(binarySerializer);
