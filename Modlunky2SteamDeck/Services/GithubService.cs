@@ -2,7 +2,7 @@
 
 namespace Modlunky2SteamDeck;
 
-public static class GithubApi
+public static class GithubService
 {
     private static readonly HttpClient SharedClient = new()
     {

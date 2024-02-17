@@ -25,7 +25,7 @@ internal abstract class Program
         var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
 
-        await GithubApi.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
+        await GithubService.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
 
         var shortcuts = ShortcutService.LoadShortcuts(shortcutsPath);
         var modlunkyEntry = ShortcutService.LoadModlunkyEntry();
