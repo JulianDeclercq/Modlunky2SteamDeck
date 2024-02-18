@@ -5,7 +5,7 @@ steam -shutdown &
 
 while pgrep -x steam >/dev/null; do
     echo "Waiting for Steam to shut down..."
-    sleep 1
+    sleep 2
 done
 
 echo "Steam has been shut down, continuing install of Modlunky2SteamDeck"
@@ -31,7 +31,3 @@ echo "Download of Modlunky2SteamDeck completed, running now."
 
 chmod +x Modlunky2SteamDeck
 ./Modlunky2SteamDeck
-
-sleep 5
-echo "Restarting Steam.."
-nohup steam > /dev/null 2>&1 &
