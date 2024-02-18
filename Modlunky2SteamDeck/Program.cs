@@ -11,10 +11,9 @@ internal abstract class Program
         Console.WriteLine("Modlunky2SteamDeck started");
 
         const string steamPath = "/home/deck/.local/share/Steam";
-        const string userDataPath = $"{steamPath}/userdata"; 
+        const string userDataPath = $"{steamPath}/userdata";
         const string configPath = $"{steamPath}/config";
         const string configFilePath = $"{configPath}/config.vdf";
-        const string gridPath = $"{configPath}/grid";
         const string spelunky2Path = $"{steamPath}/steamapps/common/Spelunky 2";
 
         if (!Path.Exists(spelunky2Path))
@@ -27,27 +26,26 @@ internal abstract class Program
         Console.WriteLine("Downloading latest Modlunky2 release from GitHub..");
         await GithubUtil.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
 
-        Console.WriteLine("Adding Modlunky2 shortcut for all Steam users");
+        Console.WriteLine("Adding Modlunky2 shortcut and grid images for all Steam users");
         foreach (var userPath in Directory.GetDirectories(userDataPath))
-            AddModlunky2Shortcut(userPath);
+        {
+            ZipUtil.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", $"{userPath}/config/grid");
+            AddModlunky2Shortcut($"{userPath}/config/shortcuts.vdf");
+        }
 
         AddCompatToolMapping(configFilePath);
 
-        Console.WriteLine("Adding grid images for Modlunky2");
-        ZipUtil.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
         Console.WriteLine("Modlunky2SteamDeck installed successfully!");
     }
 
-    private static void AddModlunky2Shortcut(string userPath)
+    private static void AddModlunky2Shortcut(string shortcutsPath)
     {
-        var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
-        
         var shortcuts = ShortcutUtil.LoadShortcuts(shortcutsPath);
         var modlunkyEntry = ShortcutUtil.LoadModlunkyEntry();
 
         if (shortcuts.Any(s => s.exe.Equals(modlunkyEntry.exe)))
         {
-            Console.WriteLine($"Shortcut with modlunky exe already exists for {userPath}, skipping..");
+            Console.WriteLine("Shortcut with modlunky exe already exists for user, skipping..");
             return;
         }
 
