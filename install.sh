@@ -25,7 +25,6 @@ echo "Download of Modlunky2SteamDeck completed, running now."
 chmod +x Modlunky2SteamDeck
 ./Modlunky2SteamDeck
 
+sleep 2
 echo "Restarting Steam.."
-steam
-
-exit
+nohup steam > /dev/null 2>&1 &
