@@ -27,3 +27,5 @@ chmod +x Modlunky2SteamDeck
 
 echo "Restarting Steam.."
 steam
+
+exit
