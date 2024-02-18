@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace Modlunky2SteamDeck.Services;
+namespace Modlunky2SteamDeck.Utils;
 
-public static class GithubService
+public static class GithubUtil
 {
     private static readonly HttpClient SharedClient = new()
     {

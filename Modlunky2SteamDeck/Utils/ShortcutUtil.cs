@@ -2,9 +2,9 @@
 using Modlunky2SteamDeck.Models;
 using ValveKeyValue;
 
-namespace Modlunky2SteamDeck.Services;
+namespace Modlunky2SteamDeck.Utils;
 
-public static class ShortcutService
+public static class ShortcutUtil
 {
     private static readonly KVSerializer BinarySerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Binary);
 

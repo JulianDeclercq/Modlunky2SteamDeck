@@ -1,9 +1,9 @@
 ﻿using System.IO.Compression;
 using System.Reflection;
 
-namespace Modlunky2SteamDeck.Services;
+namespace Modlunky2SteamDeck.Utils;
 
-public static class ZipService
+public static class ZipUtil
 {
     public static void UnzipEmbeddedResourceInto(string embeddedResource, string targetPath)
     {

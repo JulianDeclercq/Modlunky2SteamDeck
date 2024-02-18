@@ -1,5 +1,5 @@
 ﻿using Modlunky2SteamDeck.Models.Config;
-using Modlunky2SteamDeck.Services;
+using Modlunky2SteamDeck.Utils;
 using ValveKeyValue;
 
 namespace Modlunky2SteamDeck;
@@ -27,21 +27,21 @@ internal abstract class Program
         var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
 
-        await GithubService.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
+        await GithubUtil.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
 
-        var shortcuts = ShortcutService.LoadShortcuts(shortcutsPath);
-        var modlunkyEntry = ShortcutService.LoadModlunkyEntry();
+        var shortcuts = ShortcutUtil.LoadShortcuts(shortcutsPath);
+        var modlunkyEntry = ShortcutUtil.LoadModlunkyEntry();
 
         if (shortcuts.Any(s => s.exe.Equals(modlunkyEntry.exe)))
             throw new Exception("Shortcut with modlunky exe already exists.");
 
         shortcuts.Add(modlunkyEntry);
         Backup(shortcutsPath);
-        ShortcutService.SaveShortcuts(shortcuts, shortcutsPath);
+        ShortcutUtil.SaveShortcuts(shortcuts, shortcutsPath);
 
         AddCompatToolMapping(configFilePath);
 
-        ZipService.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
+        ZipUtil.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
         Console.WriteLine("Modlunky2SteamDeck finished successfully.");
     }
 
