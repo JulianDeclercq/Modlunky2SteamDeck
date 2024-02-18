@@ -9,7 +9,7 @@ internal abstract class Program
     private static async Task Main(string[] args)
     {
         Console.WriteLine("Modlunky2SteamDeck started");
-        
+
         const string steamPath = "/home/deck/.local/share/Steam";
         const string configPath = $"{steamPath}/config";
         const string configFilePath = $"{configPath}/config.vdf";
@@ -43,7 +43,7 @@ internal abstract class Program
 
         AddCompatToolMapping(configFilePath);
 
-        Console.WriteLine("Adding grid images for Modlunky2"); 
+        Console.WriteLine("Adding grid images for Modlunky2");
         ZipUtil.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
         Console.WriteLine("Modlunky2SteamDeck installed successfully!");
     }
@@ -94,7 +94,7 @@ internal abstract class Program
         var directory = Path.GetDirectoryName(path);
         if (directory == null)
             throw new Exception("Failed to get directory");
-        
+
         var backupPath = Path.Combine(directory, $"{fileName}{DateTime.Now.ToString("ddMMMyyHHmmss")}.backup");
         File.Copy(path, backupPath);
     }
