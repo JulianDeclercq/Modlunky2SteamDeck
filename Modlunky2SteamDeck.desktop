@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment[en_US]=
 Comment=
-Exec=konsole -e 'curl -L https://raw.githubusercontent.com/JulianDeclercq/Modlunky2SteamDeck/main/install.sh | bash; exec bash'
+Exec=sh -c 'curl -L https://raw.githubusercontent.com/JulianDeclercq/Modlunky2SteamDeck/main/install.sh | bash; exec bash'
 GenericName[en_US]=
 GenericName=
 MimeType=
