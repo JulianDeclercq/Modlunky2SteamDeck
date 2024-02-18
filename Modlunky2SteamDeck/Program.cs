@@ -27,8 +27,10 @@ internal abstract class Program
         var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
         var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
 
+        Console.WriteLine("Downloading latest Modlunky2 release from GitHub..");
         await GithubUtil.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
 
+        Console.WriteLine("Adding Modlunky2 shortcut to Steam..");
         var shortcuts = ShortcutUtil.LoadShortcuts(shortcutsPath);
         var modlunkyEntry = ShortcutUtil.LoadModlunkyEntry();
 
@@ -41,8 +43,9 @@ internal abstract class Program
 
         AddCompatToolMapping(configFilePath);
 
+        Console.WriteLine("Adding grid images for Modlunky2"); 
         ZipUtil.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
-        Console.WriteLine("Modlunky2SteamDeck finished successfully.");
+        Console.WriteLine("Modlunky2SteamDeck installed successfully!");
     }
 
     private static void AddCompatToolMapping(string configFilePath)
@@ -59,6 +62,7 @@ internal abstract class Program
 
         const string modlunkyAppId = "3921648026";
 
+        Console.WriteLine("Adding Modlunky compat tool mapping..");
         var compatToolMapping = config.Software.Valve.Steam.CompatToolMapping;
         if (compatToolMapping.ContainsKey(modlunkyAppId))
         {
@@ -87,7 +91,11 @@ internal abstract class Program
         if (fileName == null)
             throw new Exception("Failed to get file name without extension");
 
-        var backupPath = $"{fileName}{DateTime.UtcNow.ToString("ddMMMyyHHmmss")}.backup";
+        var directory = Path.GetDirectoryName(path);
+        if (directory == null)
+            throw new Exception("Failed to get directory");
+        
+        var backupPath = Path.Combine(directory, $"{fileName}{DateTime.Now.ToString("ddMMMyyHHmmss")}.backup");
         File.Copy(path, backupPath);
     }
 }
