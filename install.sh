@@ -1,14 +1,27 @@
 #!/bin/bash
 
-echo "Steam needs to be shutdown in order for Modlunky2SteamDeck to run. Shutting down Steam now.."
-steam -shutdown &
+if pgrep -x steam >/dev/null; then
+    echo "Steam needs to be shutdown in order for Modlunky2SteamDeck to run. Shutting down Steam now.."
+    steam -shutdown &
 
-while pgrep -x steam >/dev/null; do
-    echo "Steam is being shut down, please wait.."
-    sleep 3
-done
+    # Initialize a counter for the timeout
+    counter=0
+    max_iterations=20
 
-echo "Steam has been shut down, continuing install of Modlunky2SteamDeck"
+    while pgrep -x steam >/dev/null; do
+        if [ "$counter" -ge "$max_iterations" ]; then
+            echo "Timed out waiting for Steam to shut down."
+            exit 1
+        fi
+
+        echo "Steam is being shut down, please wait.."
+        sleep 3
+        ((counter++))
+    done
+
+    echo "Steam has been shut down, continuing install of Modlunky2SteamDeck"
+fi
+
 
 # Fetch the latest Modlunky2SteamDeck release
 api_url="https://api.github.com/repos/JulianDeclercq/Modlunky2SteamDeck/releases/latest"
