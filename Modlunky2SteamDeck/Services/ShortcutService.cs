@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
+using Modlunky2SteamDeck.Models;
 using ValveKeyValue;
 
-namespace Modlunky2SteamDeck;
+namespace Modlunky2SteamDeck.Services;
 
 public static class ShortcutService
 {
@@ -15,7 +16,7 @@ public static class ShortcutService
         Console.WriteLine("Successfully read existing shortcuts from stream.");
         return shortcuts;
     }
-    
+
     public static Shortcut LoadModlunkyEntry()
     {
         var assembly = Assembly.GetExecutingAssembly();

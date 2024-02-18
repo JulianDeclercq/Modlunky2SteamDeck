@@ -1,4 +1,4 @@
-﻿namespace Modlunky2SteamDeck.Models;
+﻿namespace Modlunky2SteamDeck.Models.Config;
 
 public class Steam
 {
@@ -21,7 +21,7 @@ public class Steam
     public SteamSystem System { get; set; }
     public string SurveyDateSteamDeckDelay { get; set; }
     public int Rate { get; set; }
-    public Dictionary<string, DecryptionKeyWrapper> depots { get; set; } 
+    public Dictionary<string, DecryptionKeyWrapper> depots { get; set; }
     public string RecentDownloadRate { get; set; } // probably a number
     public string LastConfigstoreUploadTime { get; set; }
     public Dictionary<string, SizeOnDiskWrapper> Tools { get; set; }

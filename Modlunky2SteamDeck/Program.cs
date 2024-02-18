@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using Modlunky2SteamDeck.Models;
+﻿using Modlunky2SteamDeck.Models.Config;
+using Modlunky2SteamDeck.Services;
 using ValveKeyValue;
 
 namespace Modlunky2SteamDeck;
@@ -9,9 +9,11 @@ internal abstract class Program
     private static async Task Main(string[] args)
     {
         Console.WriteLine("Modlunky2SteamDeck started");
-
+        
         const string steamPath = "/home/deck/.local/share/Steam";
-        const string configPath = $"{steamPath}/config/config.vdf";
+        const string configPath = $"{steamPath}/config";
+        const string configFilePath = $"{configPath}/config.vdf";
+        const string gridPath = $"{configPath}/grid";
         const string spelunky2Path = $"{steamPath}/steamapps/common/Spelunky 2";
 
         if (!Path.Exists(spelunky2Path))
@@ -36,13 +38,14 @@ internal abstract class Program
         shortcuts.Add(modlunkyEntry);
         Backup(shortcutsPath);
         ShortcutService.SaveShortcuts(shortcuts, shortcutsPath);
-        
-        AddCompatToolMapping(configPath);
 
+        AddCompatToolMapping(configFilePath);
+
+        ZipService.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
         Console.WriteLine("Modlunky2SteamDeck finished successfully.");
     }
 
-    private static void AddCompatToolMapping(string configPath)
+    private static void AddCompatToolMapping(string configFilePath)
     {
         var textSerializer = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
         var options = new KVSerializerOptions
@@ -51,7 +54,7 @@ internal abstract class Program
         };
         options.Conditions.Clear(); // Remove default conditionals set by the library
 
-        using var configInputStream = File.OpenRead(configPath);
+        using var configInputStream = File.OpenRead(configFilePath);
         var config = textSerializer.Deserialize<InstallConfigStore>(configInputStream, options);
 
         const string modlunkyAppId = "3921648026";
@@ -70,8 +73,8 @@ internal abstract class Program
             priority = 250
         };
 
-        Backup(configPath);
-        using var stream = new FileStream(configPath, FileMode.Truncate, FileAccess.Write, FileShare.None);
+        Backup(configFilePath);
+        using var stream = new FileStream(configFilePath, FileMode.Truncate, FileAccess.Write, FileShare.None);
         {
             var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
             kv.Serialize(stream, config, "InstallConfigStore");

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Modlunky2SteamDeck;
+namespace Modlunky2SteamDeck.Services;
 
 public static class GithubService
 {

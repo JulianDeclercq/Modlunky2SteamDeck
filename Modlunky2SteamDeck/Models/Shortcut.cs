@@ -1,4 +1,4 @@
-﻿namespace Modlunky2SteamDeck;
+﻿namespace Modlunky2SteamDeck.Models;
 
 public class Shortcut
 {

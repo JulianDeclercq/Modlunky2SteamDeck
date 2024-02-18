@@ -20,6 +20,8 @@
         <None Update="configdraft.vdf">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Remove="modlunky_grid.zip"/>
+        <EmbeddedResource Include="modlunky_grid.zip"/>
     </ItemGroup>
 
     <ItemGroup>
