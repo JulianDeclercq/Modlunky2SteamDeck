@@ -31,3 +31,6 @@ echo "Download of Modlunky2SteamDeck completed, running now."
 # Execute the release
 chmod +x Modlunky2SteamDeck
 ./Modlunky2SteamDeck
+
+# Keep terminal open to show eventual errors
+exec $SHELL
