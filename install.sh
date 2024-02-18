@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 echo "Steam needs to be shutdown in order for Modlunky2SteamDeck to run. Shutting down Steam now.."
 steam -shutdown &
