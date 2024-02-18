@@ -11,6 +11,7 @@ internal abstract class Program
         Console.WriteLine("Modlunky2SteamDeck started");
 
         const string steamPath = "/home/deck/.local/share/Steam";
+        const string userDataPath = $"{steamPath}/userdata"; 
         const string configPath = $"{steamPath}/config";
         const string configFilePath = $"{configPath}/config.vdf";
         const string gridPath = $"{configPath}/grid";
@@ -23,29 +24,36 @@ internal abstract class Program
         if (Path.Exists(modlunkyPath))
             throw new Exception("Modlunky2 is already installed.");
 
-        // TODO: Support entering your steam id, this just picks the first one.
-        var userPath = Directory.GetDirectories($"{steamPath}/userdata")[0];
-        var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
-
         Console.WriteLine("Downloading latest Modlunky2 release from GitHub..");
         await GithubUtil.DownloadLatestRelease("spelunky-fyi", "modlunky2", modlunkyPath);
 
-        Console.WriteLine("Adding Modlunky2 shortcut to Steam..");
-        var shortcuts = ShortcutUtil.LoadShortcuts(shortcutsPath);
-        var modlunkyEntry = ShortcutUtil.LoadModlunkyEntry();
-
-        if (shortcuts.Any(s => s.exe.Equals(modlunkyEntry.exe)))
-            throw new Exception("Shortcut with modlunky exe already exists.");
-
-        shortcuts.Add(modlunkyEntry);
-        Backup(shortcutsPath);
-        ShortcutUtil.SaveShortcuts(shortcuts, shortcutsPath);
+        Console.WriteLine("Adding Modlunky2 shortcut for all Steam users");
+        foreach (var userPath in Directory.GetDirectories(userDataPath))
+            AddModlunky2Shortcut(userPath);
 
         AddCompatToolMapping(configFilePath);
 
         Console.WriteLine("Adding grid images for Modlunky2");
         ZipUtil.UnzipEmbeddedResourceInto("Modlunky2SteamDeck.modlunky_grid.zip", gridPath);
         Console.WriteLine("Modlunky2SteamDeck installed successfully!");
+    }
+
+    private static void AddModlunky2Shortcut(string userPath)
+    {
+        var shortcutsPath = $"{userPath}/config/shortcuts.vdf";
+        
+        var shortcuts = ShortcutUtil.LoadShortcuts(shortcutsPath);
+        var modlunkyEntry = ShortcutUtil.LoadModlunkyEntry();
+
+        if (shortcuts.Any(s => s.exe.Equals(modlunkyEntry.exe)))
+        {
+            Console.WriteLine($"Shortcut with modlunky exe already exists for {userPath}, skipping..");
+            return;
+        }
+
+        shortcuts.Add(modlunkyEntry);
+        Backup(shortcutsPath);
+        ShortcutUtil.SaveShortcuts(shortcuts, shortcutsPath);
     }
 
     private static void AddCompatToolMapping(string configFilePath)
