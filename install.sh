@@ -31,6 +31,3 @@ echo "Download of Modlunky2SteamDeck completed, running now."
 # Execute the release
 chmod +x Modlunky2SteamDeck
 ./Modlunky2SteamDeck
-
-echo "Press enter to exit"
-read
