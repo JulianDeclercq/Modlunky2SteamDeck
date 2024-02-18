@@ -12,13 +12,13 @@
         <None Remove="modlunky_shortcut.vdf"/>
         <EmbeddedResource Include="modlunky_shortcut.vdf"/>
         <None Update="config.vdf">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </None>
         <None Update="configtest.vdf">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </None>
         <None Update="configdraft.vdf">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </None>
         <None Remove="modlunky_grid.zip"/>
         <EmbeddedResource Include="modlunky_grid.zip"/>
@@ -26,10 +26,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\submodules\ValveKeyValue\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     </ItemGroup>
 
 </Project>

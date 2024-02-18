@@ -1,4 +1,4 @@
-﻿namespace Modlunky2SteamDeck.Models;
+﻿namespace Modlunky2SteamDeck.Models.Config;
 
 public class BigPicture
 {

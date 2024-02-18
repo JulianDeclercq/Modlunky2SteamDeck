@@ -1,4 +1,4 @@
-﻿namespace Modlunky2SteamDeck.Models;
+﻿namespace Modlunky2SteamDeck.Models.Config;
 
 public class Customization
 {
@@ -7,6 +7,6 @@ public class Customization
 
 public class StartupMovie
 {
-    string MovieID { get; set; }
-    string LocalPath { get; set; }
+    public string MovieID { get; set; }
+    public string LocalPath { get; set; }
 }
