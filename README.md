@@ -4,12 +4,12 @@
 Have Spelunky 2 installed on your Steam Deck.
 
 # Instructions
-From your Steam Deck, download and execute [Modlunky2SteamDeck.desktop](https://github.com/JulianDeclercq/Modlunky2SteamDeck/releases/download/v1.0/Modlunky2SteamDeck.desktop). That's it, you can now find and play Modlunky2 from your Steam library!
+From your Steam Deck, download and execute [Modlunky2SteamDeck.desktop](https://github.com/JulianDeclercq/Modlunky2SteamDeck/releases/download/v1.1/Modlunky2SteamDeck.desktop). That's it, you can now find and play Modlunky2 from your Steam library!
 
 # Extended instructions (for beginners):
 1. On your Steam Deck, switch to Desktop Mode. This can be done by pressing the STEAM button, then select Power and choose Switch to Desktop.
 2. Open Firefox and go to this page.
-3. Download [Modlunky2SteamDeck.desktop](https://github.com/JulianDeclercq/Modlunky2SteamDeck/releases/download/v1.0/Modlunky2SteamDeck.desktop).
+3. Download [Modlunky2SteamDeck.desktop](https://github.com/JulianDeclercq/Modlunky2SteamDeck/releases/download/v1.1/Modlunky2SteamDeck.desktop).
 4. Double-click the file you just downloaded.
 5. Click the "execute" button.
 6. Switch to gaming mode by clicking the icon "Return to Gaming Mode" on your desktop.
