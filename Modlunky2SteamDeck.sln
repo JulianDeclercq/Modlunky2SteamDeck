@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modlunky2SteamDeck", "Modlunky2SteamDeck\Modlunky2SteamDeck.csproj", "{1D21516B-062A-48F7-8D59-735442EACF39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValveKeyValue", "submodules\ValveKeyValue\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj", "{17C0B433-6554-4DC4-BCE3-9A80C68ADCD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValveKeyValue", "submodules\ValveKeyValueFork\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj", "{2112186B-CDB7-4EF5-813B-06892ED15677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{1D21516B-062A-48F7-8D59-735442EACF39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D21516B-062A-48F7-8D59-735442EACF39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D21516B-062A-48F7-8D59-735442EACF39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17C0B433-6554-4DC4-BCE3-9A80C68ADCD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17C0B433-6554-4DC4-BCE3-9A80C68ADCD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17C0B433-6554-4DC4-BCE3-9A80C68ADCD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17C0B433-6554-4DC4-BCE3-9A80C68ADCD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2112186B-CDB7-4EF5-813B-06892ED15677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2112186B-CDB7-4EF5-813B-06892ED15677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2112186B-CDB7-4EF5-813B-06892ED15677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2112186B-CDB7-4EF5-813B-06892ED15677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

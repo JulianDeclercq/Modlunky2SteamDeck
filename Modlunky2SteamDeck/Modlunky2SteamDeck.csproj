@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\submodules\ValveKeyValue\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj"/>
+        <ProjectReference Include="..\submodules\ValveKeyValueFork\ValveKeyValue\ValveKeyValue\ValveKeyValue.csproj"/>
     </ItemGroup>
 
 </Project>
