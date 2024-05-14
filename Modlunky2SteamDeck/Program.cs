@@ -85,10 +85,8 @@ internal abstract class Program
 
         Backup(configFilePath);
         using var stream = new FileStream(configFilePath, FileMode.Truncate, FileAccess.Write, FileShare.None);
-        {
-            var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
-            kv.Serialize(stream, config, "InstallConfigStore");
-        }
+        var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
+        kv.Serialize(stream, config, "InstallConfigStore");
     }
 
     private static void Backup(string path)
@@ -101,7 +99,7 @@ internal abstract class Program
         if (directory == null)
             throw new Exception("Failed to get directory");
 
-        var backupPath = Path.Combine(directory, $"{fileName}{DateTime.Now.ToString("ddMMMyyHHmmss")}.backup");
+        var backupPath = Path.Combine(directory, $"{fileName}{DateTime.Now:ddMMMyyHHmmss}.backup");
         File.Copy(path, backupPath);
     }
 }
