@@ -5,6 +5,7 @@
 
 ## Requirements:
 Have Spelunky 2 installed on your Steam Deck.
+Installation on an sd card is currently **NOT** supported.
 
 # Instructions
 From your Steam Deck, download and execute [Modlunky2SteamDeck.desktop](https://github.com/JulianDeclercq/Modlunky2SteamDeck/releases/download/v1.1/Modlunky2SteamDeck.desktop). That's it, you can now find and play Modlunky2 from your Steam library!
