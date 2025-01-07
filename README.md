@@ -1,4 +1,4 @@
-# One click installer for Modlunky2 on Steam Deck
+# One click installer for [Modlunky2](https://github.com/spelunky-fyi/modlunky2) on Steam Deck
 <div align="center">
   <img src="https://github.com/JulianDeclercq/Modlunky2SteamDeck/assets/11051769/82deaa19-9a25-412a-ac96-9a66147a91af" alt="3921648026">
 </div>
